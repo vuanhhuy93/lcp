@@ -1,0 +1,13 @@
+title Lấy về số dư của user
+
+participant LCS
+participant LCP
+database LCP-DB
+
+activate LCS
+LCS->LCP: Gửi yêu cầu lấy về thông tin số dư
+LCP->LCP-DB: Lấy về thông tin cấu hình client, wallet_type
+LCP->LCP: Validate thông tin client và request, wallet_type
+LCP->LCP-DB: Tìm kiếm thông tin wallet
+LCP-->LCS: Trả về thông tin số dư
+deactivate LCS

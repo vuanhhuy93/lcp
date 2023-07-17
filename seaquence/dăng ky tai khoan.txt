@@ -1,0 +1,22 @@
+title Đăng ký tài khoản
+
+participant LCS
+participant LCP
+database LCP-DB
+activate LCS
+LCS->LCP: yêu cầu tạo tài khoản
+LCP->LCP-DB: Tìm kiếm thông tin về client
+LCP-DB-->LCP: Trả về kết quả tìm kiếm
+LCP->LCP: validate hash request với request data
+LCP->LCP-DB: Tìm kiếm wallet-type theo client
+LCP-DB-->LCP: Trả về kết quả tìm kiếm
+LCP->LCP: validate wallet-type
+LCP->LCP-DB: Lấy thông tin về wallet-link-type
+LCP-DB-->LCP: Trả về kết quả tìm kiếm
+LCP->LCP: Validate linktype, lấy ra địa chỉ validate \n Trong TH này là grpc or restapi của LCS BE
+LCP->LCS: Từ tham số REF-ID, kiểm tra tồn tại \n của ID liên kết với ví
+LCS-->LCP: Trả về kết quả validate
+LCP->LCP-DB: Tạo ví
+LCP-DB-->LCP: Tạo ví thành công
+LCP-->LCS: Trả về thông tin ví
+deactivate LCS
